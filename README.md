@@ -1,7 +1,7 @@
 # taro-app-cli
 taro小程序开发脚手架,mobx,hooks
 
-[node.js](http://nodejs.cn/)
+[http://static.nodejs.cn/_static/img/logo.svg](http://nodejs.cn/)
 
 ##使用前先:
 
