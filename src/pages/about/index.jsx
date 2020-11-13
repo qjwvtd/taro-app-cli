@@ -7,24 +7,24 @@ import counterStore from '@/store/counter';
 import './style.less';
 
 const About = observer(() => {
-  const [params, setParams] = useState({});
-  function backHome(){
-    Taro.navigateBack({url: '/pages/index/index'});
-  }
-  useEffect(() => {
-    const obj = getCurrentInstance().router.params;
-    console.log(obj);
-    if(obj){
-      setParams(obj);
+    const [params, setParams] = useState({});
+    function backHome(){
+        Taro.navigateBack({url: '/pages/index/index'});
     }
-  }, []);
-  return <View className='about text-center'>
-    <View>count:{counterStore.counter}</View>
-    <View>id:{params.id}</View>
-    <View>name:{params.name}</View>
-    <View>status:{params.status}</View>
-    <Button onClick={backHome}>返回首页</Button>
-  </View>;
+    useEffect(() => {
+        const obj = getCurrentInstance().router.params;
+        console.log(obj);
+        if(obj){
+            setParams(obj);
+        }
+    }, []);
+    return <View className='about text-center'>
+        <View>count:{counterStore.counter}</View>
+        <View>id:{params.id}</View>
+        <View>name:{params.name}</View>
+        <View>status:{params.status}</View>
+        <Button onClick={backHome}>返回首页</Button>
+    </View>;
 });
 
 export default About;

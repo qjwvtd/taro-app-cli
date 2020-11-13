@@ -6,13 +6,13 @@ import counterStore from './store/counter';
 import './app.less';
 
 const store = {
-  counterStore
+    counterStore
 };
 
 function App({children}){
-  return <Provider store={store}>
-    {children}
-  </Provider>;
+    return <Provider store={store}>
+        {children}
+    </Provider>;
 }
 
 export default App;
