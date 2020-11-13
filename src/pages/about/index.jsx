@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from 'react';
-import Taro,{ getCurrentInstance } from '@tarojs/taro'
+import React, { useEffect, useState } from 'react';
+import Taro, { getCurrentInstance } from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
 import { observer } from 'mobx-react';
 import counterStore from '@/store/counter';
@@ -7,7 +7,7 @@ import counterStore from '@/store/counter';
 import './style.less';
 
 const About = observer(() => {
-  const [params,setParams] = useState({});
+  const [params, setParams] = useState({});
   function backHome(){
     Taro.navigateBack({url: '/pages/index/index'});
   }
@@ -17,11 +17,12 @@ const About = observer(() => {
     if(obj){
       setParams(obj);
     }
-  },[]);
-  return <View className="about">
+  }, []);
+  return <View className='about text-center'>
     <View>count:{counterStore.counter}</View>
     <View>id:{params.id}</View>
     <View>name:{params.name}</View>
+    <View>status:{params.status}</View>
     <Button onClick={backHome}>返回首页</Button>
   </View>;
 });

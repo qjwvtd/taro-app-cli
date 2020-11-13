@@ -1,21 +1,22 @@
-import { observable } from 'mobx'
+import { observable } from 'mobx';
 
 const counterStore = observable({
   counter: 0,
+  data: {},
   counterStore() {
-    this.counter++
+    this.counter++;
   },
   increment() {
-    this.counter++
+    this.counter++;
   },
   decrement() {
-    this.counter--
+    this.counter--;
   },
   incrementAsync() {
     setTimeout(() => {
-      this.counter++
-    }, 1000)
+      this.data = {id:1, name:'zhangxiaojun', status:'牛逼啦...'};
+    }, 1000);
   }
-})
+});
 
-export default counterStore
+export default counterStore;
