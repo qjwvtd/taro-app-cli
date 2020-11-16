@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Taro, { getCurrentInstance } from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
 import { observer } from 'mobx-react';
-import counterStore from '@/store/counter';
+import counterStore from '@/common/store/counter';
 
 import './style.less';
 

@@ -1,12 +1,16 @@
-import React, {  } from 'react';
+import React, { useState, useEffect } from 'react';
 import Taro, {} from '@tarojs/taro';
+import { AtTabBar } from 'taro-ui';
 import { View, Button } from '@tarojs/components';
 import { observer } from 'mobx-react';
-import counterStore from '@/store/counter';
+import counterStore from '@/common/store/counter';
+import fetch from '@/common/http';
 
 import './style.less';
 
 const Index = observer(() => {
+    const [current, updateCurrent] = useState(0);
+    const tablist = [{ title: '首页' }, { title: '关于我们', text: 8 }];
     function increment(){
         counterStore.increment();
     }
@@ -16,20 +20,39 @@ const Index = observer(() => {
     function incrementAsync(){
         counterStore.incrementAsync();
     }
-    function openAboutView(){
-    //跳转到目的页面，打开新页面及传参
+    function handleClick(value){
+        updateCurrent(value);
         const data = counterStore.data;
+        let url = null;
+        switch(value){
+            case 0:
+                url = '/pages/index/index';
+                break;
+            case 1:
+                url = '/pages/about/index?id='+data.id+'&name='+data.name + '&status=' + data.status;
+                break;
+        }
+        //跳转到目的页面
         Taro.navigateTo({
-            url: '/pages/about/index?id='+data.id+'&name='+data.name + '&status=' + data.status
+            url: url
         });
     }
+    useEffect(() => {
+        console.log(fetch);
+    }, []);
     return <View className='index'>
         <Button onClick={increment}>+</Button>
         <Button onClick={decrement}>-</Button>
         <Button onClick={incrementAsync}>异步处理</Button>
         <View className='text-center'>{counterStore.counter}</View>
         <View className='text-center'>{JSON.stringify(counterStore.data)}</View>
-        <Button onClick={openAboutView} className='toAbout'>去关于我们</Button>
+        <AtTabBar
+            tabList={tablist}
+            onClick={handleClick}
+            current={current}
+            fixed
+            fontSize={18}
+        />
     </View>;
 });
 export default Index;

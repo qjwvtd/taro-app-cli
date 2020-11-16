@@ -4,8 +4,7 @@ module.exports = {
     "ecmaFeatures": {
       "jsx": true
     },
-    "useJSXTextNode": true,
-    "project": "./tsconfig.json"
+    "useJSXTextNode": true
   },
   "rules": {
     //强制4个缩进
@@ -17,6 +16,8 @@ module.exports = {
     //防止在JSX中使用的变量被错误地标记为未使用
     "react/jsx-uses-vars": 2,
     "react/jsx-uses-react": 2,
+    //JSX缩进属性
+    "react/jsx-indent-props": [1, 4],
     // 检查 Hook 的规则
     "react-hooks/rules-of-hooks": "error",
     // 检查 effect 的依赖

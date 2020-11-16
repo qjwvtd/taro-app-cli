@@ -3,6 +3,7 @@
     "projectname": "taro-app-cli",
     "description": "--",
     "appid": "touristappid",
+    "useCompilerModule": true,
     "setting": {
         "urlCheck": true,
         "es6": false,

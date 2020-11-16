@@ -1,8 +1,10 @@
+//taro-ui样式文件必须在入口文件最顶部引入
+import 'taro-ui/dist/style/index.scss';
 import React, {  } from 'react';
 import { Provider } from 'mobx-react';
+import counterStore from './common/store/counter';
 
-import counterStore from './store/counter';
-
+//自定义样式
 import './app.less';
 
 const store = {

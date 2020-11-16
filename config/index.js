@@ -26,11 +26,7 @@ const config = {
     options: {
     }
   },
-  alias: {
-    '@/': resolve('src'),
-    '@/pages': resolve('src/pages'),
-    '@/store': resolve('src/store')
-  },
+  alias: {},//此处不配置,在webpackChain中自定义
   framework: 'react',
   mini: {
     //自定义 Webpack 配置。
@@ -45,13 +41,21 @@ const config = {
             }
         }],
         enforce: "pre", // 编译前检查
+        include: resolve('src'),
         exclude: /node_modules/
+      };
+      const myResolve = {
+        extensions: ['.js', '.jsx', '.css', '.scss', '.less'],
+        alias: {
+          '@': resolve('src')
+        }
       };
       chain.merge({
         module: {
           rules: {'eslint-loader': esLintLoader}
         },
-        plugins:[eslintPlugin]
+        resolve: myResolve,
+        plugins: [eslintPlugin]
       })
     },
     postcss: {

@@ -1,5 +1,5 @@
 # taro-app-cli
-taro小程序开发脚手架,mobx,hooks
+taro小程序开发脚手架,taro-ui,mobx,hooks
 
 ![Taro.js](https://github.githubassets.com/images/icons/emoji/unicode/1f47d.png,'Taro.js')
 
