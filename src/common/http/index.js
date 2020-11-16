@@ -25,7 +25,7 @@ function updateStorage(data = {}) {
 export default async function fetch(options) {
     const { url, payload, method = 'GET', showToast = true, autoLogin = true } = options;
     const token = await getStorage('token');
-    const header = token ? { 'Authorization': `Bearer ${token}` } : {};
+    const header = token ? { 'Authorization': 'Bearer' + token } : {};
     if (method === 'POST') {
         header['content-type'] = 'application/json;charset=utf-8';
     }
