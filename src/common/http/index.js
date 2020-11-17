@@ -3,9 +3,6 @@
 */
 import Taro from '@tarojs/taro';
 
-const CODE_SUCCESS = 200;
-const CODE_AUTH_EXPIRED = 401;
-
 function getStorage(key) {
     return Taro.getStorage({ key }).then(res => res.data).catch(() => '');
 }
@@ -22,8 +19,9 @@ function updateStorage(data = {}) {
  * // NOTE 需要注意 RN 不支持 *StorageSync，此处用 async/await 解决
  * @param {*} options
  */
-export default async function fetch(options) {
-    const { url, payload, method = 'GET', showToast = true, autoLogin = true } = options;
+// export default async function fetch(options) {
+export async function fetch(options) {
+    const { url, data, method = 'GET', showToast = true, autoLogin = true } = options;
     const token = await getStorage('token');
     const header = token ? { 'Authorization': 'Bearer' + token } : {};
     if (method === 'POST') {
@@ -33,19 +31,19 @@ export default async function fetch(options) {
     return Taro.request({
         url,
         method,
-        data: payload,
+        data: data,
         header
     }).then(async (res) => {
-        const { code, data } = res.data;
-        if (+code !== CODE_SUCCESS) {
-            if (+code === CODE_AUTH_EXPIRED) {
+        console.log(res);
+        if (+res.data.code !== 200) {
+            if (+res.data.code === 401) {
                 await updateStorage({});
             }
             return Promise.reject(res.data);
         }
-        return data;
+        return res.data;
     }).catch((err) => {
-        const defaultMsg = +err.code === CODE_AUTH_EXPIRED ? '登录失效' : '请求异常';
+        const defaultMsg = +err.code === 401 ? '登录失效' : '请求异常';
         if (showToast) {
             Taro.showToast({
                 title: err && err.errorMsg || defaultMsg,
@@ -53,12 +51,34 @@ export default async function fetch(options) {
             });
         }
 
-        if (err.code === CODE_AUTH_EXPIRED && autoLogin) {
+        if (err.code === 401 && autoLogin) {
             Taro.navigateTo({
-                url: '/pages/login/login'
+                url: '/pages/login/index'
             });
         }
 
         return Promise.reject({ message: defaultMsg, ...err });
     });
 }
+export default{
+    async GET(url, data){
+        const option = {
+            url: url,
+            data: data,
+            method: 'GET',
+            showToast: true,
+            autoLogin: true
+        };
+        return fetch(option);
+    },
+    async POST(url, data){
+        const option = {
+            url: url,
+            data: data,
+            method: 'POST',
+            showToast: true,
+            autoLogin: true
+        };
+        return fetch(option);
+    }
+};

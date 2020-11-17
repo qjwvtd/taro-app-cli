@@ -14,6 +14,7 @@ const config = {
     828: 1.81 / 2
   },
   sourceRoot: 'src',
+  //启动多端调试
   outputRoot: 'dist',
   plugins: [
     'babel-plugin-transform-decorators-legacy'
@@ -52,7 +53,7 @@ const config = {
       };
       chain.merge({
         module: {
-          rules: {'eslint-loader': esLintLoader}
+          rules: [esLintLoader]
         },
         resolve: myResolve,
         plugins: [eslintPlugin]
