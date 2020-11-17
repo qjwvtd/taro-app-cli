@@ -1,4 +1,6 @@
 module.exports = {
+  //wx全局变量,以免报错
+  "globals": { wx: true },
   "extends": ["taro","taro/react"],
   "parserOptions": {
     "ecmaFeatures": {

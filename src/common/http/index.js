@@ -43,10 +43,17 @@ export async function fetch(options) {
         }
         return res.data;
     }).catch((err) => {
+        if(err){
+            Taro.showToast({
+                title: err.errMsg,
+                icon: 'none'
+            });
+            return;
+        }
         const defaultMsg = +err.code === 401 ? '登录失效' : '请求异常';
         if (showToast) {
             Taro.showToast({
-                title: err && err.errorMsg || defaultMsg,
+                title: err && err.errMsg || defaultMsg,
                 icon: 'none'
             });
         }

@@ -43,7 +43,7 @@ const Index = observer(() => {
     return <View className='index'>
         <Button onClick={increment}>+</Button>
         <Button onClick={decrement}>-</Button>
-        <Button onClick={incrementAsync}>获取图形验证码</Button>
+        <Button onClick={incrementAsync}>图形验证码</Button>
         <View className='text-center'>{counterStore.counter}</View>
         <Image className='text-center' style={{width:'100px', height:'40px'}} src={counterStore.img} />
         <View className='text-center'>{JSON.stringify(counterStore.data)}</View>
