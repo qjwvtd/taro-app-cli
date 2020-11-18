@@ -52,7 +52,6 @@ const Index = observer(() => {
             onClick={handleClick}
             current={current}
             fixed
-            fontSize={18}
         />
     </View>;
 });
