@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Taro, { } from '@tarojs/taro';
 import { Provider } from 'mobx-react';
 import counterStore from './common/store/counter';
+import {getWxUserInfo} from '@/common/utils/wx.js';
 
 //自定义样式
 import './app.less';
@@ -13,47 +14,29 @@ const store = {
 };
 
 function App({children}){
-    //小程序授权
-    function auth(){
+    //检查小程序是否授权
+    function checkAuth(){
         wx.getSetting({
             success(res) {
                 console.log(res);
                 const user = res.authSetting['scope.userInfo'];
                 //已授权
                 if(user){
-                    wx.getUserInfo({
-                        success: (userinfo) => {
-                            console.log(userinfo);
-                        }
+                    console.log('已授权', user);
+                    getWxUserInfo().then((res) => {
+                        console.log(res);
                     });
                 }
                 //未授权,跳到授权页面
                 if(!user){
+                    console.log('未授权', user);
                     Taro.navigateTo({url:'/pages/authorize/index'});
                 }
-                // if (!res.authSetting['scope.userInfo']) {
-                //     wx.openSetting({
-                //         success(){
-                //             res.authSetting = {
-                //                 "scope.userInfo": true,
-                //                 "scope.userLocation": true,
-                //                 "scope.address": true
-                //             };
-                //         }
-                //     }),
-                //     wx.authorize({
-                //         scope: 'scope.userInfo',
-                //         success(){
-                //             // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-                //             wx.startRecord();
-                //         }
-                //     });
-                // }
             }
         });
     }
     useEffect(() => {
-        auth();
+        checkAuth();
     }, []);
     return <Provider store={store}>
         {children}

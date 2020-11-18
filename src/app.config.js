@@ -8,7 +8,7 @@ export default {
     window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: 'WeChat',
+        navigationBarTitleText: '测试小程序',
         navigationBarTextStyle: 'black'
     }
 };
