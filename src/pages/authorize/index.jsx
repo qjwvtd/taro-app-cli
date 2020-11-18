@@ -32,7 +32,6 @@ const Authorize = observer(() => {
                     src='https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico'
                 />
             </View>
-
             <View class='text-content'>
                 <view>申请获取以下权限</view>
                 <text>获得你的公开信息(昵称，头像等)</text>
