@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import Taro, { } from '@tarojs/taro';
-import { View, Text, Button } from '@tarojs/components';
+import { View, Button,Image} from '@tarojs/components';
 import { observer } from 'mobx-react';
 // import counterStore from '@/common/store/counter';
 
@@ -12,13 +12,18 @@ const Authorize = observer(() => {
         wx.login({
             success(res){
                 console.log(res);
+                const {code} = res;
+                const appid = 'wx2e7d42abb6e77143';
+                const secret = '21c72980b3860532e22d99b32c4157d7';
+                // 补上自己的 APPID 和 SECRET
+                const requestBaseUrl = 'https://api.weixin.qq.com/sns/jscode2session';
+                const url = requestBaseUrl + '?appid=' + appid + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code';
                 wx.request({
-                    // 补上自己的 APPID 和 SECRET
-                    url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx2e7d42abb6e77143=21c72980b3860532e22d99b32c4157d7&js_code=' + res.code + '&grant_type=authorization_code',
-                    success(userData){
+                    url: url,
+                    success(requestData){
                         // 获取到用户的 openid
-                        console.log("用户:", userData);
-                        setResponse(userData);
+                        setResponse(requestData.data);
+                        console.log("requestData:", requestData);
                     }
                 });
             }
@@ -26,11 +31,22 @@ const Authorize = observer(() => {
     }
     return <View className='authorize'>
         <View className='text-center' style={{padding:'50px 0'}}>
-            <Text>请先授权</Text>
+            <View class='header'>
+                <Image 
+                    style={{width:'60px',height:'60px'}}
+                    src='https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico' 
+                />
+            </View>
+
+            <View class='text-content'>
+                <view>申请获取以下权限</view>
+                <text>获得你的公开信息(昵称，头像等)</text>
+            </View>
         </View>
-        <Button onClick={wxLogin}>点击授权</Button>
-        <View style={{padding:'20px'}}>
-            <Text selectable>{JSON.stringify(response)}</Text>
+        <Button onClick={wxLogin}>授权登录</Button>
+        <View style={{padding:'20px',border:'1px solid red'}}>
+            <View>openid:{response.openid}</View>
+            <View>session_key:{response.session_key}</View>
         </View>
     </View>;
 });
