@@ -13,8 +13,8 @@ const Authorize = observer(() => {
         if (data){
             console.log('用户按了允许授权按钮');
             getWxUserInfo().then((res) => {
-                setUser(res.rawData);
                 if(res.rawData){
+                    setUser(res.rawData);
                     wx.showToast({title:'授权成功'});
                 }
             });
@@ -39,7 +39,7 @@ const Authorize = observer(() => {
         </View>
         <Button open-type='getUserInfo' onGetUserInfo={bindGetUserInfo}>点我授权</Button>
         <View style={{padding:'20px', border:'1px solid red'}}>
-            <View style='word-break: keep-all;word-wrap: break-word;white-space: pre-line;'>{user}</View>
+            <View className="wordWrapView">{user}</View>
         </View>
     </View>;
 });
