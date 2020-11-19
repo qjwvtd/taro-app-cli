@@ -39,7 +39,7 @@ const Authorize = observer(() => {
         </View>
         <Button open-type='getUserInfo' onGetUserInfo={bindGetUserInfo}>点我授权</Button>
         <View style={{padding:'20px', border:'1px solid red'}}>
-            <View className="wordWrapView">{user}</View>
+            <View className='wordWrapView'>{user}</View>
         </View>
     </View>;
 });

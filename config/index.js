@@ -1,5 +1,6 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin');
+const {esLintLoader,cssLoader,lessLoader} = require('./loader');
 
 function resolve(name) {
   return path.resolve(__dirname, '..', name);
@@ -27,33 +28,20 @@ const config = {
     options: {
     }
   },
-  alias: {},//此处不配置,在webpackChain中自定义
+  alias: {
+    '@': resolve('src')
+  },
   framework: 'react',
   mini: {
     //自定义 Webpack 配置。
     webpackChain:(chain, webpack) => {
       const eslintPlugin = new ESLintPlugin();
-      const esLintLoader = {
-        test: /\.(js|jsx)$/,
-        use: [{
-            loader: 'eslint-loader',
-            options: { // 这里的配置项参数将会被传递到 eslint的CLIEngine
-                formatter: require('eslint-friendly-formatter') // 指定错误报告的格式规范
-            }
-        }],
-        enforce: "pre", // 编译前检查
-        include: resolve('src'),
-        exclude: /node_modules/
-      };
       const myResolve = {
-        extensions: ['.js', '.jsx', '.css', '.scss', '.less'],
-        alias: {
-          '@': resolve('src')
-        }
+        extensions: ['.js', '.jsx', '.css', '.scss', '.less']
       };
       chain.merge({
         module: {
-          rules: [esLintLoader]
+          rules: [esLintLoader,cssLoader,lessLoader]
         },
         resolve: myResolve,
         plugins: [eslintPlugin]
