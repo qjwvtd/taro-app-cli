@@ -20,11 +20,11 @@ function updateStorage(data = {}) {
  * @param {*} options
  */
 // export default async function fetch(options) {
-export async function fetch(options) {
+async function fetch(options) {
     const { url, data, method = 'GET', showToast = true, autoLogin = true } = options;
     const token = await getStorage('token');
     const header = token ? { 'Authorization': 'Bearer' + token } : {};
-    if (method === 'POST') {
+    if (method === 'POST' || method === 'PUT') {
         header['content-type'] = 'application/json;charset=utf-8';
     }
 
@@ -83,6 +83,26 @@ export default{
             url: url,
             data: data,
             method: 'POST',
+            showToast: true,
+            autoLogin: true
+        };
+        return fetch(option);
+    },
+    async PUT(url, data){
+        const option = {
+            url: url,
+            data: data,
+            method: 'PUT',
+            showToast: true,
+            autoLogin: true
+        };
+        return fetch(option);
+    },
+    async DELETE(url, data){
+        const option = {
+            url: url,
+            data: data,
+            method: 'DELETE',
             showToast: true,
             autoLogin: true
         };

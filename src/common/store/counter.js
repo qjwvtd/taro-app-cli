@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
-import http from '@/common/http';
 import {getUUid} from '@/common/utils';
+import { getBase64Img } from '@/common/api/public';
 
 const counterStore = observable({
     counter: 0,
@@ -13,7 +13,6 @@ const counterStore = observable({
         this.counter--;
     },
     incrementAsync() {
-        const url = 'https://saas-dev.dhwork.cn/api/versatile/v1/verifyCode/base64';
         const sendData = {
             "height": 40,
             "key": getUUid(),
@@ -21,7 +20,7 @@ const counterStore = observable({
             "stringNum": 4,
             "width": 100
         };
-        http.POST(url, sendData).then((res) => {
+        getBase64Img(sendData).then((res) => {
             this.img = 'data:image/jpeg;base64,' + res.data;
             this.data = {id:1, name:'zhangxiaojun', status:'牛逼啦...'};
         });
