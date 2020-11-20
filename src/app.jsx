@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Taro, { } from '@tarojs/taro';
+import Taro, {  } from '@tarojs/taro';
 import { Provider } from 'mobx-react';
 import counterStore from '@/common/store/counter';
 import {getWxUserInfo} from '@/common/utils/wx.js';
@@ -12,7 +12,7 @@ const store = {
     counterStore
 };
 
-function App({children}){
+function View({children}){
     //检查小程序是否授权
     function checkAuth(){
         wx.getSetting({
@@ -42,4 +42,4 @@ function App({children}){
     </Provider>;
 }
 
-export default App;
+export default View;

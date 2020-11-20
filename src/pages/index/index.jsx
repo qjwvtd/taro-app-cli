@@ -51,6 +51,9 @@ const Index = observer(() => {
             tabList={tablist}
             onClick={handleClick}
             current={current}
+            fontSize={20}
+            backgroundColor='#ececec'
+            color='#ea6bb8'
             fixed
         />
     </View>;

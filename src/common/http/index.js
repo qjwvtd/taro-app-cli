@@ -3,6 +3,8 @@
 */
 import Taro from '@tarojs/taro';
 
+const baseUrl = 'https://saas-dev.dhwork.cn';
+
 function getStorage(key) {
     return Taro.getStorage({ key }).then(res => res.data).catch(() => '');
 }
@@ -28,12 +30,7 @@ async function fetch(options) {
         header['content-type'] = 'application/json;charset=utf-8';
     }
 
-    return Taro.request({
-        url,
-        method,
-        data: data,
-        header
-    }).then(async (res) => {
+    return Taro.request({url, method, data: data, header}).then(async (res) => {
         console.log(res);
         if (+res.data.code !== 200) {
             if (+res.data.code === 401) {
@@ -70,42 +67,42 @@ async function fetch(options) {
 export default{
     async GET(url, data){
         const option = {
-            url: url,
-            data: data,
-            method: 'GET',
-            showToast: true,
-            autoLogin: true
+            url: baseUrl + url,
+            data: data
         };
+        option.method = 'GET';
+        option.showToast = true;
+        option.showToast = true;
         return fetch(option);
     },
     async POST(url, data){
         const option = {
-            url: url,
-            data: data,
-            method: 'POST',
-            showToast: true,
-            autoLogin: true
+            url: baseUrl + url,
+            data: data
         };
+        option.method = 'POST';
+        option.showToast = true;
+        option.showToast = true;
         return fetch(option);
     },
     async PUT(url, data){
         const option = {
-            url: url,
-            data: data,
-            method: 'PUT',
-            showToast: true,
-            autoLogin: true
+            url: baseUrl + url,
+            data: data
         };
+        option.method = 'PUT';
+        option.showToast = true;
+        option.showToast = true;
         return fetch(option);
     },
     async DELETE(url, data){
         const option = {
-            url: url,
-            data: data,
-            method: 'DELETE',
-            showToast: true,
-            autoLogin: true
+            url: baseUrl + url,
+            data: data
         };
+        option.method = 'DELETE';
+        option.showToast = true;
+        option.showToast = true;
         return fetch(option);
     }
 };

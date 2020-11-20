@@ -8,6 +8,7 @@ import './style.less';
 
 const Authorize = observer(() => {
     const [user, setUser] = useState('');
+    //授权
     function bindGetUserInfo(e){
         const data = e.detail.userInfo;
         if (data){
@@ -22,6 +23,7 @@ const Authorize = observer(() => {
         if(!data){
             console.log('用户按了拒绝按钮');
             wx.showModal({title:'授权失败', content:'不授权将无法使用我们的服务咯,亲!!'});
+            setUser('');
         }
     }
     return <View className='authorize'>
