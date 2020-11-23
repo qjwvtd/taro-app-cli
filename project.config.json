@@ -3,7 +3,7 @@
     "projectname": "taro-app-cli",
     "description": "--",
     "appid": "wx2e7d42abb6e77143",
-    "secret": "",
+    "secret": "21c72980b3860532e22d99b32c4157d7",
     "useCompilerModule": true,
     "setting": {
         "urlCheck": false,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Taro, { getCurrentInstance } from '@tarojs/taro';
+import Taro, { useRouter } from '@tarojs/taro';
 import { View, Button, Image } from '@tarojs/components';
 import { observer } from 'mobx-react';
 import counterStore from '@/common/store/counter';
@@ -13,7 +13,8 @@ const About = observer(() => {
         Taro.navigateBack({url: '/pages/index/index'});
     }
     useEffect(() => {
-        const obj = getCurrentInstance().router.params;
+        const router = useRouter();
+        const obj = router.params;
         console.log(obj);
         if(obj){
             setParams(obj);
