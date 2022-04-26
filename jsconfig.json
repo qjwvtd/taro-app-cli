@@ -1,0 +1,8 @@
+//compilerOptions中配置paths是为了配合config/index.js的alias,让编辑器能识别 
+{
+    "compilerOptions":{
+        "paths":{
+            "@":["./src/*"]
+        }
+    }
+}

@@ -1,0 +1,19 @@
+html{
+    font-size: 16px;
+}
+page{
+    height: 100%;
+}
+view{
+    font-size: clamp(16px, 5vw, 34px);//仅当该值大于 16px 且小于 34px 时,h1 字体大小值将为视口宽度的 5％
+}
+//元素自动换行类
+.wordWrapView{
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+//文本位置
+.text-left{text-align: left;}
+.text-center{text-align: center;}
+.text-right{text-align: right;}
