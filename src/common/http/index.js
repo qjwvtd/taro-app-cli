@@ -21,7 +21,6 @@ function updateStorage(data = {}) {
  * // NOTE 需要注意 RN 不支持 *StorageSync，此处用 async/await 解决
  * @param {*} options
  */
-// export default async function fetch(options) {
 async function fetch(options) {
     const { url, data, method = 'GET', showToast = true, autoLogin = true } = options;
     const token = await getStorage('token');
@@ -72,7 +71,6 @@ export default{
         };
         option.method = 'GET';
         option.showToast = true;
-        option.showToast = true;
         return fetch(option);
     },
     async POST(url, data){
@@ -81,7 +79,6 @@ export default{
             data: data
         };
         option.method = 'POST';
-        option.showToast = true;
         option.showToast = true;
         return fetch(option);
     },
@@ -92,7 +89,6 @@ export default{
         };
         option.method = 'PUT';
         option.showToast = true;
-        option.showToast = true;
         return fetch(option);
     },
     async DELETE(url, data){
@@ -101,7 +97,6 @@ export default{
             data: data
         };
         option.method = 'DELETE';
-        option.showToast = true;
         option.showToast = true;
         return fetch(option);
     }
